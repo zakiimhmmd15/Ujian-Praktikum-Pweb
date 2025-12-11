@@ -1,0 +1,146 @@
+<!-- Minimalis Dark Mode Version -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <title>Expense Tracker - Minimal Dark</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <div class="header-section">
+      <h1>Expense Tracker</h1>
+      <div class="header-actions">
+        <label class="switch">
+          <input type="checkbox" id="economyMode">
+          <span class="slider"></span>
+          <span class="switch-label">Mode Hemat</span>
+        </label>
+        <label class="switch">
+          <input type="checkbox" id="showCharts" checked>
+          <span class="slider"></span>
+          <span class="switch-label">Grafik</span>
+        </label>
+        <button class="btn-export" onclick="exportToCSV()">📥 Ekspor CSV</button>
+      </div>
+    </div>
+
+    <!-- Ringkasan Cepat -->
+    <div class="summary-cards">
+      <div class="summary-card">
+        <div class="summary-label">Hari Ini</div>
+        <div class="summary-value" id="todayTotal">Rp 0</div>
+        <div class="summary-badge" id="todayBadge"></div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-label">Minggu Ini</div>
+        <div class="summary-value" id="weekTotal">Rp 0</div>
+        <div class="summary-badge" id="weekBadge"></div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-label">Bulan Ini</div>
+        <div class="summary-value" id="monthTotal">Rp 0</div>
+        <div class="summary-badge" id="monthBadge"></div>
+      </div>
+    </div>
+
+    <!-- Budget Harian -->
+    <div class="budget-card">
+      <div class="budget-header">
+        <h3>Budget Harian</h3>
+        <input type="number" id="dailyBudget" placeholder="Set budget harian" class="budget-input" />
+        <button onclick="setDailyBudget()">Set</button>
+      </div>
+      <div class="budget-progress">
+        <div class="progress-bar">
+          <div class="progress-fill" id="budgetProgress"></div>
+        </div>
+        <div class="budget-info">
+          <span id="budgetUsed">Rp 0</span>
+          <span id="budgetRemaining">dari Rp 0</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Kartu Kategori -->
+    <div class="category-cards" id="categoryCards"></div>
+
+    <!-- Filter & Pencarian -->
+    <div class="filter-section">
+      <input type="text" id="searchBox" placeholder="🔍 Cari pengeluaran..." class="search-input" />
+      <div class="filter-row">
+        <input type="date" id="filterDateFrom" placeholder="Dari tanggal" />
+        <input type="date" id="filterDateTo" placeholder="Sampai tanggal" />
+        <select id="filterCategory">
+          <option value="">Semua Kategori</option>
+          <option>Makanan</option>
+          <option>Transport</option>
+          <option>Belanja</option>
+          <option>Hiburan</option>
+          <option>Kesehatan</option>
+        </select>
+        <select id="filterMethod">
+          <option value="">Semua Metode</option>
+          <option value="Cash">Cash</option>
+          <option value="Cashless">Cashless</option>
+        </select>
+        <button onclick="clearFilters()">Reset</button>
+      </div>
+    </div>
+
+    <div class="form-card">
+      <h3>Tambah Pengeluaran</h3>
+      <input type="text" id="item" placeholder="Nama Pengeluaran" />
+      <div class="row">
+        <input type="number" id="qty" placeholder="Qty" />
+        <input type="number" id="price" placeholder="Harga" />
+      </div>
+      <div class="row">
+        <input type="date" id="date" />
+        <select id="method">
+          <option value="Cash">Cash</option>
+          <option value="Cashless">Cashless</option>
+        </select>
+      </div>
+      <select id="category">
+        <option>Makanan</option>
+        <option>Transport</option>
+        <option>Belanja</option>
+        <option>Hiburan</option>
+        <option>Kesehatan</option>
+      </select>
+      <div class="row form-actions">
+        <button id="submitBtn" onclick="addExpense()">Tambah</button>
+        <button id="cancelEditBtn" class="btn-muted" onclick="cancelEdit()" style="display:none">Batal</button>
+      </div>
+    </div>
+
+    <!-- Notifikasi -->
+    <div class="notification" id="notification"></div>
+
+    <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Nama</th>
+          <th>Qty</th>
+          <th>Harga</th>
+          <th>Total</th>
+          <th>Tanggal</th>
+          <th>Metode</th>
+          <th>Kategori</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody id="list"></tbody>
+    </table>
+    </div>
+
+    <div class="total-box" id="summary">Total Pengeluaran: Rp 0</div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
