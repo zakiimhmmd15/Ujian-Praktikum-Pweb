@@ -57,7 +57,7 @@ function showLoginModal(){
       <h3>Login / Register</h3>
       <input id="u_name" placeholder="Username" />
       <div>
-        <input id="u_pass" type="password" placeholder="Password (min. 8 karakter)" />
+        <input id="u_pass" type="password" placeholder="Password" />
         <div style="font-size:11px; color:#a0aec0; margin-top:4px; text-align:left;">*Password minimal 8 karakter</div>
       </div>
       <div style="display:flex;gap:8px;margin-top:12px">
