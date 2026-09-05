@@ -33,7 +33,6 @@ window.addEventListener('load', ()=>{
   setupFilters();
   setupEconomyMode();
   setupChartsToggle();
-  loadBudget();
   loadChartJs(()=>{
     initCharts();
     renderAll();
@@ -42,11 +41,7 @@ window.addEventListener('load', ()=>{
 
 // ---------- AUTH (simple modal) ----------
 function ensureLogin(){
-  const last = localStorage.getItem(LAST_USER);
-  if(last){ 
-    loginAs(last); 
-    return; 
-  }
+  // Selalu tampilkan modal login/register saat halaman baru dibuka
   showLoginModal();
 }
 
@@ -62,7 +57,7 @@ function showLoginModal(){
       <h3>Login / Register</h3>
       <input id="u_name" placeholder="Username" />
       <div>
-        <input id="u_pass" type="password" placeholder="Password" />
+        <input id="u_pass" type="password" placeholder="Password (min. 8 karakter)" />
         <div style="font-size:11px; color:#a0aec0; margin-top:4px; text-align:left;">*Password minimal 8 karakter</div>
       </div>
       <div style="display:flex;gap:8px;margin-top:12px">
